@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Primeiros - MTA Gang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gang: {
+                            red: '#b91c1c', // Koyu Kan Kırmızısı
+                            dark: '#0a0a0a', // Simsiyah
+                            gray: '#171717',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Oswald', 'sans-serif'],
+                        grunge: ['Special Elite', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Genel Ayarlar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #b91c1c; border-radius: 4px; }
+        
+        .bg-pattern {
+            background-color: #000000;
+            background-image: repeating-radial-gradient( circle at 0 0, transparent 0, #000000 10px ), repeating-linear-gradient( #11111155, #111111 );
+        }
+
+        /* Animasyonlar */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Menü Overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 200;
+            display: none;
+            flex-direction: column; justify-content: center; align-items: center;
+            backdrop-filter: blur(15px);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .menu-overlay.show { display: flex; opacity: 1; }
+
+        .menu-link {
+            font-size: 2rem; color: white; margin: 1rem 0;
+            text-transform: uppercase; font-weight: bold;
+            transition: all 0.3s ease; cursor: pointer; position: relative;
+        }
+        .menu-link:hover { color: #b91c1c; transform: scale(1.05); }
+
+        /* Paneller */
+        .panel-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 300;
+            display: none; justify-content: center; align-items: center;
+            padding: 20px; opacity: 0; transition: opacity 0.4s ease;
+        }
+        .panel-modal.show { display: flex; opacity: 1; }
+
+        .panel-inner {
+            background-color: #171717; border: 1px solid #b91c1c;
+            width: 100%; max-width: 900px; padding: 2rem;
+            position: relative;
+            box-shadow: 0 0 50px rgba(185, 28, 28, 0.2);
+            border-radius: 8px; transform: scale(0.95); transition: transform 0.4s ease;
+        }
+        .panel-modal.show .panel-inner { transform: scale(1); }
+
+        .close-btn {
+            position: absolute; top: 15px; right: 20px;
+            color: #b91c1c; font-size: 2rem; cursor: pointer; z-index: 10;
+        }
+
+        /* Video Alanı */
+        .video-container {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            border-radius: 8px; border: 1px solid #333;
+        }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* Sabit Resim Efekti */
+        .static-img-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .static-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.5s ease;
+            filter: grayscale(80%);
+        }
+        .static-img-container:hover .static-img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+        .img-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .static-img-container:hover .img-overlay {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body class="bg-gang-dark text-white font-sans antialiased selection:bg-gang-red selection:text-white overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-black/80 border-b border-white/10 backdrop-blur-md h-20 transition-all duration-300">
+        <div class="w-full h-full px-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://flagcdn.com/pt.svg" alt="Portugal Flag" class="h-8 shadow-[0_0_15px_rgba(185,28,28,0.3)] rounded-sm">
+                <span class="font-bold text-2xl tracking-wider text-white">LOS <span class="text-gang-red">PRIMEIROS</span></span>
+            </div>
+            <button onclick="toggleMenu()" class="text-white hover:text-gang-red transition-colors focus:outline-none p-2">
+                <i class="fas fa-bars text-3xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Tam Ekran Menü -->
+    <div id="fullscreen-menu" class="menu-overlay">
+        <button onclick="toggleMenu()" class="absolute top-6 right-6 text-gray-500 hover:text-white text-4xl transition-colors">
+            <i class="fas fa-times"></i>
+        </button>
+        <img src="https://flagcdn.com/pt.svg" alt="Portugal" class="h-16 mb-8 opacity-80 drop-shadow-lg">
+        <a onclick="toggleMenu(); location.href='#home'" class="menu-link">ANA SAYFA</a>
+        <a onclick="toggleMenu(); location.href='#hikaye'" class="menu-link">HİKAYEMİZ</a>
+        <a onclick="openPanel('kurallar-panel')" class="menu-link">KURALLAR</a>
+        <a onclick="toggleMenu(); location.href='#galeri'" class="menu-link">ÇETEDEN KARELER</a>
+        <a onclick="toggleMenu(); location.href='#basvuru'" class="menu-link text-sm text-gray-400 mt-8 !font-normal !tracking-normal">İLETİŞİM</a>
+    </div>
+
+    <!-- Hero Section -->
+    <header id="home" class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-4">
+        <div class="absolute inset-0 z-0">
+            <!-- Arka Plan Resmi -->
+            <img src="uploaded:WhatsApp Image 2025-11-25 at 19.55.24_ac5d19ba.jpg-372f9ebc-8e02-4f9e-8200-1f26637ff047" class="w-full h-full object-cover opacity-20 grayscale" alt="Background">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-gang-dark"></div>
+        </div>
+
+        <div class="relative z-10 w-full max-w-6xl mx-auto text-center reveal active">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tighter text-white drop-shadow-xl">
+                LOS <span class="text-gang-red">PRIMEIROS</span>
+            </h1>
+            <p class="text-lg md:text-2xl text-gray-400 font-grunge tracking-[0.3em] mb-12 inline-block pb-2 border-b border-gang-red/50">
+                "SAYGI KAZANILMAZ, ALINIR."
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start text-left">
+                <!-- Video -->
+                <div class="lg:col-span-8 w-full bg-zinc-900/50 p-2 rounded-xl border border-white/5 backdrop-blur-sm shadow-2xl reveal">
+                    <div class="video-container bg-black">
+                        <iframe src="https://www.youtube.com/embed/jYzE8OnVsM4?si=123" title="Tanıtım Videosu" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- Karakter Listesi -->
+                <div class="lg:col-span-4 bg-zinc-900/80 border border-white/5 rounded-xl p-6 shadow-xl reveal delay-200 backdrop-blur-sm h-full">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center border-b border-white/10 pb-4">
+                        <i class="fas fa-skull text-gang-red mr-3"></i> AKTİF ÜYELER
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 font-sans text-lg">
+                        <li class="flex justify-between items-center group cursor-default">
+                            <span class="group-hover:text-white transition-colors">Andre Costa</span> <span class="text-xs bg-gang-red/20 text-gang-red px-2 py-1 rounded">#1</span>
+                        </li>
+                        <li class="flex justify-between items-center group cursor-default">
+                            <span class="group-hover:text-white transition-colors">Wigly Clarke</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#2</span>
+                        </li>
+                        <li class="flex justify-between items-center group cursor-default">
+                            <span class="group-hover:text-white transition-colors">Luis Carvalho</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#3</span>
+                        </li>
+                        <li class="flex justify-between items-center group cursor-default">
+                            <span class="group-hover:text-white transition-colors">Diva Caneza</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#4</span>
+                        </li>
+                        <li class="flex justify-between items-center group cursor-default">
+                            <span class="group-hover:text-white transition-colors">Seth Swech</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#5</span>
+                        </li>
+                        <li class="flex justify-between items-center group cursor-default">
+                            <span class="group-hover:text-white transition-colors">Cedric Cyrus</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#6</span>
+                        </li>
+                        <li class="flex justify-between items-center group cursor-default">
+                            <span class="group-hover:text-white transition-colors">Zaki Lawronks</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#7</span>
+                        </li>
+                        <li class="flex justify-between items-center group cursor-default">
+                            <span class="group-hover:text-white transition-colors">Carter Ice</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#8</span>
+                        </li>
+                        <li class="flex justify-between items-center group cursor-default">
+                            <span class="group-hover:text-white transition-colors">Jeremiah Langford</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#9</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hikaye Section -->
+    <section id="hikaye" class="py-24 bg-pattern relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gang-dark to-transparent pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center reveal">
+            <h2 class="text-4xl font-bold text-white mb-10 uppercase tracking-widest inline-flex items-center gap-4">
+                <span class="w-12 h-1 bg-gang-red rounded-full"></span>
+                Hikayemiz
+                <span class="w-12 h-1 bg-gang-red rounded-full"></span>
+            </h2>
+            <div class="bg-zinc-900/60 p-10 rounded-2xl border border-white/5 shadow-2xl backdrop-blur-md text-left transform hover:scale-[1.01] transition-transform duration-500">
+                <p class="text-gray-300 text-lg md:text-xl leading-loose font-light font-sans text-justify">
+                    <span class="text-gang-red font-bold text-2xl float-left mr-2 mt-[-5px]">L</span>os Primeiros, Lizbon sokaklarının karanlık köşelerinde doğup, şehrin en acımasız kurallarıyla büyüyen bir ailedir. Biz sadece bir çete değiliz, kan bağı olmayan kardeşleriz. Yıllar önce küçük bir grup olarak başladığımız bu yolda, şimdi şehrin yeraltı dünyasına hükmediyoruz. İhanet affedilmez, sadakat ödüllendirilir. Amacımız sadece para değil, bu şehirde kalıcı bir miras bırakmak. Kırmızımız kanımızı, siyahımız kaderimizi temsil eder.
+                </p>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-gang-dark to-transparent pointer-events-none"></div>
+    </section>
+
+    <!-- ÇETEDEN KARELER (SABİT RESİMLER) -->
+    <section id="galeri" class="py-20 bg-gang-dark border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 reveal">
+            <h2 class="text-4xl font-bold text-center text-white mb-16 uppercase tracking-widest">
+                ÇETEDEN <span class="text-gang-red">KARELER</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Fotoğraf Alanı 1: Graffiti Duvarı -->
+                <div class="aspect-video rounded-xl overflow-hidden shadow-lg shadow-red-900/10 border-2 border-zinc-800">
+                    <div class="static-img-container">
+                        <!-- Yüklenen resmin yolu -->
+                        <img src="uploaded:WhatsApp Image 2025-11-25 at 19.51.55_fe628c1b.jpg-0cf6da59-fd2f-479a-af98-9eb7a6d8d60f" 
+                             alt="Gang Graffiti" 
+                             class="static-img">
+                        <div class="img-overlay">
+                            <p class="text-white font-bold tracking-widest text-lg">BÖLGE HAKİMİYETİ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fotoğraf Alanı 2: Bayraklı Duvar -->
+                <div class="aspect-video rounded-xl overflow-hidden shadow-lg shadow-red-900/10 border-2 border-zinc-800">
+                    <div class="static-img-container">
+                        <!-- Yüklenen resmin yolu -->
+                        <img src="uploaded:WhatsApp Image 2025-11-25 at 19.51.55_2b317fd9.jpg-7a4518ca-4f61-4d1b-918d-f145e70c11b5" 
+                             alt="Gang Flag" 
+                             class="static-img">
+                        <div class="img-overlay">
+                            <p class="text-white font-bold tracking-widest text-lg">AİLE BAĞLARI</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <p class="text-center text-gray-500 text-sm mt-8 opacity-60">
+                *Bu fotoğraflar kalıcıdır ve siteye giren herkes tarafından görülebilir.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="basvuru" class="bg-black text-white py-16 border-t border-gang-red/30">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="mb-8">
+                <img src="https://flagcdn.com/pt.svg" alt="Portugal" class="h-10 mx-auto opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+            </div>
+            <h2 class="text-3xl font-bold mb-10 uppercase tracking-widest text-white">AİLEYE KATIL</h2>
+            <div class="flex justify-center gap-6 mb-12">
+                <a href="#" class="w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-[#5865F2] hover:text-white hover:scale-110 hover:rotate-3 transition-all duration-300 border border-zinc-800 shadow-lg group">
+                    <i class="fab fa-discord text-2xl group-hover:animate-bounce"></i>
+                </a>
+                <a href="#" class="w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-gang-red hover:text-white hover:scale-110 hover:-rotate-3 transition-all duration-300 border border-zinc-800 shadow-lg group">
+                    <i class="fas fa-file-signature text-2xl group-hover:animate-pulse"></i>
+                </a>
+            </div>
+            <p class="text-zinc-600 text-sm font-light tracking-wide">&copy; 2024 Los Primeiros. Designed for MTA Roleplay.</p>
+        </div>
+    </footer>
+
+    <!-- Kurallar Paneli -->
+    <div id="kurallar-panel" class="panel-modal">
+        <div class="panel-inner max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <i class="fas fa-times close-btn" onclick="closePanel('kurallar-panel')"></i>
+            <h2 class="text-3xl font-bold text-gang-red mb-8 uppercase tracking-widest text-center border-b border-zinc-800 pb-4">KURALLAR</h2>
+            
+            <div class="space-y-6 text-gray-300 font-sans text-left">
+                <h3 class="text-xl font-bold text-white mb-2">LOS PRİMEİROS 🇵🇹 - RULES</h3>
+                <ul class="space-y-4 text-sm md:text-base text-gray-400 list-none">
+                    <li>1 - Her gang üyesi günde 3 adet editlenebilir, mantıklı, çete tarzına uygun fotoğraf çekip hikayesi ile birlikte faaliyet alt başlığına iletmelidi.</li>
+                    <li class="pl-4 border-l-2 border-gang-red">> 2 - R20 veya R19 karakterleri hergün birini görevlendirip mahallede sosyal rol yaptırıcakır</li>
+                    <li class="pl-4 border-l-2 border-gang-red">> 3 - Belirlenen sokak ve mahalleler çetenin hâkimiyet alanıdır, bu alanlarda aktiflik sağlamak zorunudr.</li>
+                    <li class="pl-4 border-l-2 border-gang-red">> 4 - Savaş veya barış kararını sadece liderlik verir; bireysel intikam girişimleri ysatır.</li>
+                    <li class="pl-4 border-l-2 border-gang-red">> 5- Meslek alındığında mahallede bazı noktalarda uyuşturucu tezgahları tutan zenciler olarak görevlendirilcesiniz.</li>
+                    <li class="pl-4 border-l-2 border-gang-red">> 6 - Çete sembolleri, renkleri veya işaretlerine uymakzounludur.</li>
+                    <li class="pl-4 border-l-2 border-gang-red">> 6 - Birlik içerisindeki hiçbir üye birbirine karşı ne olursa olsun saygısızlık yapamaz. Saygısızlık halinde haklı/haksız gözetmeksizin iki tarafta uyarılır, 3 uyarıda birikten atılır!</li>
+                    <li class="pl-4 border-l-2 border-gang-red">> *7 - IC rütbe istemek kesinlikle yasaktır. Kişi yaptığı roller ile göz önünde bulunucaktır, yeterince yükseltilecektir.</li>
+                </ul>
+                <br>
+                <h3 class="text-xl font-bold text-white mb-2">Voice RP Kullanımı HK.</h3>
+                <p>Birlik içerisinde nerede olursa olsun, hiçbir koşulda Voice RP yapılması kesinlikle yasaktır. Voice RP’ye dair hiçbir istisna kabul edilmez, yapılama.</p>
+                <br>
+                <h3 class="text-xl font-bold text-white mb-2">Mahallede Aktiflik HK.</h3>
+                <p>Birliğe bağlı tüm üyeler, hood bölgesi ve çevresinde düzenli şekilde aktif olmakla yükümlüdü.</p>
+                <p>| Birlik atmosferi, mahalledeki rol yoğunluğu ve etkileşimler üzerinden canlı kalır; bu nedenle her üyenin IC olarak bölgede bulunması, gözükmesi ve katkı sağlaması bekleir</p>
+                <p>| Mahallede aktif olmak yalnızca “orada durmak” anlamına gelmez; rol üretmek, karakterin çevreyle etkileşim kurması ve birliğin varlığını hissettirmesi geek.</p>
+                <br>
+                <p class="text-sm italic">*Oluşumumuzun IC ve OOC kuralları yukarıda belirlenmtir</p>
+                <p class="text-sm italic">*Tüm üyelerin bu kuralları okuması, anlaması ve uygulaması zorundur.*</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Animasyon ve Menü Kodları ---
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+
+        function toggleMenu() {
+            const menu = document.getElementById('fullscreen-menu');
+            if (menu.classList.contains('show')) {
+                menu.classList.remove('show');
+                setTimeout(() => { menu.style.display = 'none'; }, 400);
+                document.body.style.overflow = 'auto';
+            } else {
+                menu.style.display = 'flex';
+                setTimeout(() => { menu.classList.add('show'); }, 10);
+                document.body.style.overflow = 'hidden';
+                closePanel('kurallar-panel');
+            }
+        }
+
+        function openPanel(panelId) {
+            const menu = document.getElementById('fullscreen-menu');
+            menu.classList.remove('show');
+            setTimeout(() => { menu.style.display = 'none'; }, 400);
+
+            const panel = document.getElementById(panelId);
+            if(panel) {
+                panel.style.display = 'flex';
+                setTimeout(() => { panel.classList.add('show'); }, 10);
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closePanel(panelId) {
+            const panel = document.getElementById(panelId);
+            if(panel) {
+                panel.classList.remove('show');
+                setTimeout(() => { panel.style.display = 'none'; }, 400);
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
