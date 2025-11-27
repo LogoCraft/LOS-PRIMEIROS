@@ -14,8 +14,8 @@
                 extend: {
                     colors: {
                         gang: {
-                            red: '#b91c1c', // Koyu Kan Kırmızısı
-                            dark: '#0a0a0a', // Simsiyah
+                            red: '#b91c1c', 
+                            dark: '#0a0a0a', 
                             gray: '#171717',
                         }
                     },
@@ -29,7 +29,6 @@
     </script>
 
     <style>
-        /* Genel Ayarlar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #b91c1c; border-radius: 4px; }
@@ -39,42 +38,26 @@
             background-image: repeating-radial-gradient( circle at 0 0, transparent 0, #000000 10px ), repeating-linear-gradient( #11111155, #111111 );
         }
 
-        /* Animasyonlar */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Menü Overlay */
         .menu-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 200;
-            display: none;
-            flex-direction: column; justify-content: center; align-items: center;
-            backdrop-filter: blur(15px);
-            opacity: 0; transition: opacity 0.4s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.95); z-index: 200;
+            display: none; flex-direction: column; justify-content: center; align-items: center;
+            backdrop-filter: blur(15px); opacity: 0; transition: opacity 0.4s ease;
         }
         .menu-overlay.show { display: flex; opacity: 1; }
 
         .menu-link {
-            font-size: 2rem; color: white; margin: 1rem 0;
-            text-transform: uppercase; font-weight: bold;
+            font-size: 2rem; color: white; margin: 1rem 0; text-transform: uppercase; font-weight: bold;
             transition: all 0.3s ease; cursor: pointer; position: relative;
         }
         .menu-link:hover { color: #b91c1c; transform: scale(1.05); }
 
-        /* Paneller */
         .panel-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 300;
+            background-color: rgba(0, 0, 0, 0.95); z-index: 300;
             display: none; justify-content: center; align-items: center;
             padding: 20px; opacity: 0; transition: opacity 0.4s ease;
         }
@@ -82,55 +65,33 @@
 
         .panel-inner {
             background-color: #171717; border: 1px solid #b91c1c;
-            width: 100%; max-width: 900px; padding: 2rem;
-            position: relative;
-            box-shadow: 0 0 50px rgba(185, 28, 28, 0.2);
-            border-radius: 8px; transform: scale(0.95); transition: transform 0.4s ease;
+            width: 100%; max-width: 1000px; padding: 2rem; position: relative;
+            box-shadow: 0 0 50px rgba(185, 28, 28, 0.2); border-radius: 8px; 
+            transform: scale(0.95); transition: transform 0.4s ease;
+            max-height: 90vh; display: flex; flex-direction: column;
         }
         .panel-modal.show .panel-inner { transform: scale(1); }
 
-        .close-btn {
-            position: absolute; top: 15px; right: 20px;
-            color: #b91c1c; font-size: 2rem; cursor: pointer; z-index: 10;
-        }
+        .close-btn { position: absolute; top: 15px; right: 20px; color: #b91c1c; font-size: 2rem; cursor: pointer; z-index: 50; }
 
-        /* Video Alanı */
-        .video-container {
-            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
-            border-radius: 8px; border: 1px solid #333;
-        }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 1px solid #333; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        /* Sabit Resim Efekti */
-        .static-img-container {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            position: relative;
+        .static-img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Karakter Menü Stilleri */
+        .char-btn {
+            width: 100%; text-align: left; padding: 15px;
+            border-bottom: 1px solid #333; transition: all 0.3s;
+            color: #888; font-family: 'Oswald', sans-serif; letter-spacing: 1px;
         }
-        .static-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease, filter 0.5s ease;
-            filter: grayscale(80%);
-        }
-        .static-img-container:hover .static-img {
-            transform: scale(1.05);
-            filter: grayscale(0%);
-        }
-        .img-overlay {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 1rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .static-img-container:hover .img-overlay {
-            opacity: 1;
-        }
-
+        .char-btn:hover { background: #222; color: white; padding-left: 20px; }
+        .char-btn.active { background: #b91c1c; color: white; border-color: #b91c1c; padding-left: 20px; font-weight: bold; }
+        
+        .char-content { display: none; animation: fadeIn 0.5s ease; }
+        .char-content.active { display: flex; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="bg-gang-dark text-white font-sans antialiased selection:bg-gang-red selection:text-white overflow-x-hidden">
@@ -148,24 +109,22 @@
         </div>
     </nav>
 
-    <!-- Tam Ekran Menü -->
+    <!-- Menü -->
     <div id="fullscreen-menu" class="menu-overlay">
-        <button onclick="toggleMenu()" class="absolute top-6 right-6 text-gray-500 hover:text-white text-4xl transition-colors">
-            <i class="fas fa-times"></i>
-        </button>
+        <button onclick="toggleMenu()" class="absolute top-6 right-6 text-gray-500 hover:text-white text-4xl transition-colors"><i class="fas fa-times"></i></button>
         <img src="https://flagcdn.com/pt.svg" alt="Portugal" class="h-16 mb-8 opacity-80 drop-shadow-lg">
         <a onclick="toggleMenu(); location.href='#home'" class="menu-link">ANA SAYFA</a>
         <a onclick="toggleMenu(); location.href='#hikaye'" class="menu-link">HİKAYEMİZ</a>
         <a onclick="openPanel('kurallar-panel')" class="menu-link">KURALLAR</a>
+        <a onclick="openPanel('karakter-panel')" class="menu-link text-gang-red border-b border-gang-red">KARAKTER TANITIMI</a>
         <a onclick="toggleMenu(); location.href='#galeri'" class="menu-link">ÇETEDEN KARELER</a>
         <a onclick="toggleMenu(); location.href='#basvuru'" class="menu-link text-sm text-gray-400 mt-8 !font-normal !tracking-normal">İLETİŞİM</a>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <header id="home" class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-4">
         <div class="absolute inset-0 z-0">
-            <!-- Arka Plan Resmi -->
-            <img src="uploaded:WhatsApp Image 2025-11-25 at 19.55.24_ac5d19ba.jpg-372f9ebc-8e02-4f9e-8200-1f26637ff047" class="w-full h-full object-cover opacity-20 grayscale" alt="Background">
+            <img src="https://images.unsplash.com/photo-1555567784-a151528f8042?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover opacity-20 grayscale" alt="Background">
             <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-gang-dark"></div>
         </div>
 
@@ -178,71 +137,77 @@
             </p>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start text-left">
-                <!-- Video -->
                 <div class="lg:col-span-8 w-full bg-zinc-900/50 p-2 rounded-xl border border-white/5 backdrop-blur-sm shadow-2xl reveal">
                     <div class="video-container bg-black">
                         <iframe src="https://www.youtube.com/embed/jYzE8OnVsM4?si=123" title="Tanıtım Videosu" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
 
-                <!-- Karakter Listesi -->
-                <div class="lg:col-span-4 bg-zinc-900/80 border border-white/5 rounded-xl p-6 shadow-xl reveal delay-200 backdrop-blur-sm h-full">
-                    <h3 class="text-xl font-bold text-white mb-6 flex items-center border-b border-white/10 pb-4">
-                        <i class="fas fa-skull text-gang-red mr-3"></i> AKTİF ÜYELER
-                    </h3>
-                    <ul class="space-y-3 text-gray-300 font-sans text-lg">
-                        <li class="flex justify-between items-center group cursor-default">
-                            <span class="group-hover:text-white transition-colors">Andre Costa</span> <span class="text-xs bg-gang-red/20 text-gang-red px-2 py-1 rounded">#1</span>
-                        </li>
-                        <li class="flex justify-between items-center group cursor-default">
-                            <span class="group-hover:text-white transition-colors">Wigly Clarke</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#2</span>
-                        </li>
-                        <li class="flex justify-between items-center group cursor-default">
-                            <span class="group-hover:text-white transition-colors">Luis Carvalho</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#3</span>
-                        </li>
-                        <li class="flex justify-between items-center group cursor-default">
-                            <span class="group-hover:text-white transition-colors">Diva Caneza</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#4</span>
-                        </li>
-                        <li class="flex justify-between items-center group cursor-default">
-                            <span class="group-hover:text-white transition-colors">Seth Swech</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#5</span>
-                        </li>
-                        <li class="flex justify-between items-center group cursor-default">
-                            <span class="group-hover:text-white transition-colors">Cedric Cyrus</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#6</span>
-                        </li>
-                        <li class="flex justify-between items-center group cursor-default">
-                            <span class="group-hover:text-white transition-colors">Zaki Lawronks</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#7</span>
-                        </li>
-                        <li class="flex justify-between items-center group cursor-default">
-                            <span class="group-hover:text-white transition-colors">Carter Ice</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#8</span>
-                        </li>
-                        <li class="flex justify-between items-center group cursor-default">
-                            <span class="group-hover:text-white transition-colors">Jeremiah Langford</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#9</span>
-                        </li>
-                    </ul>
+                <div class="lg:col-span-4 space-y-4">
+                    <!-- Aktif Üyeler Listesi -->
+                    <div class="bg-zinc-900/80 border border-white/5 rounded-xl p-6 shadow-xl reveal delay-200 backdrop-blur-sm">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center border-b border-white/10 pb-2">
+                            <i class="fas fa-skull text-gang-red mr-3"></i> AKTİF ÜYELER
+                        </h3>
+                        <ul class="space-y-2 text-gray-300 font-sans text-md max-h-[400px] overflow-y-auto custom-scrollbar">
+                            <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Andre Costa</span> <span class="text-xs bg-gang-red/20 text-gang-red px-2 py-1 rounded">#1</span></li>
+                            <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Wigly Clarke</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#2</span></li>
+                            <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Luis Carvalho</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#3</span></li>
+                            <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Seth Swech</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#5</span></li>
+                            <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Cedric Cyrus</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#6</span></li>
+                            <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Zaki Lawronks</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#7</span></li>
+                            <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Carter Ice</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#8</span></li>
+                            <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Jeremiah Langford</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#9</span></li>
+                            <!-- Yeni Üyeler -->
+                            <li class="flex justify-between items-center group cursor-default border-t border-white/5 pt-1 mt-1"><span class="group-hover:text-white transition-colors font-bold text-gang-red/80">Rafael Swech</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#10</span></li>
+                            <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Dante Silva</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#11</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Ölen Üyeler Listesi -->
+                    <div class="bg-black/60 border border-zinc-800 rounded-xl p-6 shadow-xl reveal delay-300 backdrop-blur-sm grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all">
+                        <h3 class="text-xl font-bold text-gray-500 mb-4 flex items-center border-b border-zinc-800 pb-2 uppercase text-sm tracking-widest">
+                            <i class="fas fa-cross text-zinc-600 mr-3"></i> ÖLEN ÜYELER
+                        </h3>
+                        <ul class="space-y-2 text-gray-500 font-sans text-md italic">
+                            <li class="flex justify-between items-center border-b border-zinc-800 pb-1">
+                                <span>Henrique Barros</span> 
+                                <i class="fas fa-dove text-xs"></i>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-zinc-800 pb-1">
+                                <span>Diva Caneza</span> 
+                                <i class="fas fa-dove text-xs"></i>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Hikaye Section -->
+    <!-- Hikaye -->
     <section id="hikaye" class="py-24 bg-pattern relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gang-dark to-transparent pointer-events-none"></div>
         <div class="max-w-4xl mx-auto px-6 text-center reveal">
             <h2 class="text-4xl font-bold text-white mb-10 uppercase tracking-widest inline-flex items-center gap-4">
-                <span class="w-12 h-1 bg-gang-red rounded-full"></span>
-                Hikayemiz
-                <span class="w-12 h-1 bg-gang-red rounded-full"></span>
+                <span class="w-12 h-1 bg-gang-red rounded-full"></span> Hikayemiz <span class="w-12 h-1 bg-gang-red rounded-full"></span>
             </h2>
             <div class="bg-zinc-900/60 p-10 rounded-2xl border border-white/5 shadow-2xl backdrop-blur-md text-left transform hover:scale-[1.01] transition-transform duration-500">
                 <p class="text-gray-300 text-lg md:text-xl leading-loose font-light font-sans text-justify">
-                    <span class="text-gang-red font-bold text-2xl float-left mr-2 mt-[-5px]">L</span>os Primeiros, Lizbon sokaklarının karanlık köşelerinde doğup, şehrin en acımasız kurallarıyla büyüyen bir ailedir. Biz sadece bir çete değiliz, kan bağı olmayan kardeşleriz. Yıllar önce küçük bir grup olarak başladığımız bu yolda, şimdi şehrin yeraltı dünyasına hükmediyoruz. İhanet affedilmez, sadakat ödüllendirilir. Amacımız sadece para değil, bu şehirde kalıcı bir miras bırakmak. Kırmızımız kanımızı, siyahımız kaderimizi temsil eder.
+                    <span class="text-gang-red font-bold text-2xl float-left mr-2 mt-[-5px]">P</span>ortekiz’in dar sokaklarında büyüyen bir grup genç, hayatı basketbol sahasında tanıdı. Her şey dostluktu, kardeşlikti… ta ki bir kavga sırasında en iyi arkadaşları <strong>Henrique'yi</strong> kaybedene dek. Bu kayıp, Andre Costa’nın yüreğinde silinmez bir iz bıraktı.
+                    <br><br>
+                    Adaletin sessiz kaldığı yerde, Andre konuştu. Dostlarını etrafına topladı ve <strong>"Los Primeiros"</strong> çetesini kurdu. İlkler olmak için yola çıktılar; sokakların sessizliğini, isimleriyle dolduracaklardı. Ancak bu yükseliş Portekiz devletinin dikkatini çekti. Takip, baskı ve savaş…
+                    <br><br>
+                    Andre, ekibini alıp izlerini silerek <strong>"Grandoria Adası’na"</strong> yerleşti. Şimdi orada, kendi kurallarını koydukları bir dünya var. 
+                    <br><br>
+                    <span class="text-white font-normal italic border-l-2 border-gang-red pl-3 block mt-4">Los Primeiros, bir çeteden öte; acının, sadakatin ve liderliğin adı oldu.</span>
                 </p>
             </div>
         </div>
         <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-gang-dark to-transparent pointer-events-none"></div>
     </section>
 
-    <!-- ÇETEDEN KARELER (SABİT RESİMLER) -->
+    <!-- ÇETEDEN KARELER (Sabit) -->
     <section id="galeri" class="py-20 bg-gang-dark border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 reveal">
             <h2 class="text-4xl font-bold text-center text-white mb-16 uppercase tracking-widest">
@@ -250,66 +215,49 @@
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Fotoğraf Alanı 1: Graffiti Duvarı -->
-                <div class="aspect-video rounded-xl overflow-hidden shadow-lg shadow-red-900/10 border-2 border-zinc-800">
-                    <div class="static-img-container">
-                        <!-- Yüklenen resmin yolu -->
-                        <img src="uploaded:WhatsApp Image 2025-11-25 at 19.51.55_fe628c1b.jpg-0cf6da59-fd2f-479a-af98-9eb7a6d8d60f" 
-                             alt="Gang Graffiti" 
-                             class="static-img">
-                        <div class="img-overlay">
-                            <p class="text-white font-bold tracking-widest text-lg">BÖLGE HAKİMİYETİ</p>
-                        </div>
+                <!-- Foto 1 -->
+                <div class="aspect-video rounded-xl overflow-hidden shadow-lg shadow-red-900/10 border-2 border-zinc-800 relative group">
+                    <img src="uploaded:WhatsApp Image 2025-11-25 at 19.51.55_fe628c1b.jpg-0cf6da59-fd2f-479a-af98-9eb7a6d8d60f" 
+                         onerror="this.src='https://imgur.com/a/jJqzivi';"
+                         class="static-img w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <span class="text-white font-bold tracking-wider">BÖLGE HAKİMİYETİ</span>
                     </div>
                 </div>
 
-                <!-- Fotoğraf Alanı 2: Bayraklı Duvar -->
-                <div class="aspect-video rounded-xl overflow-hidden shadow-lg shadow-red-900/10 border-2 border-zinc-800">
-                    <div class="static-img-container">
-                        <!-- Yüklenen resmin yolu -->
-                        <img src="uploaded:WhatsApp Image 2025-11-25 at 19.51.55_2b317fd9.jpg-7a4518ca-4f61-4d1b-918d-f145e70c11b5" 
-                             alt="Gang Flag" 
-                             class="static-img">
-                        <div class="img-overlay">
-                            <p class="text-white font-bold tracking-widest text-lg">AİLE BAĞLARI</p>
-                        </div>
+                <!-- Foto 2 -->
+                <div class="aspect-video rounded-xl overflow-hidden shadow-lg shadow-red-900/10 border-2 border-zinc-800 relative group">
+                    <img src="uploaded:WhatsApp Image 2025-11-25 at 19.51.55_2b317fd9.jpg-7a4518ca-4f61-4d1b-918d-f145e70c11b5" 
+                         onerror="this.src='https://i.imgur.com/Ts5rx5E.jpeg';"
+                         class="static-img w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <span class="text-white font-bold tracking-wider">AİLE BAĞLARI</span>
                     </div>
                 </div>
-
             </div>
-            
-            <p class="text-center text-gray-500 text-sm mt-8 opacity-60">
-                *Bu fotoğraflar kalıcıdır ve siteye giren herkes tarafından görülebilir.
-            </p>
+            <p class="text-center text-gray-500 text-sm mt-8 opacity-60">*Fotoğraflar sabittir.</p>
         </div>
     </section>
 
     <!-- Footer -->
     <footer id="basvuru" class="bg-black text-white py-16 border-t border-gang-red/30">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="mb-8">
-                <img src="https://flagcdn.com/pt.svg" alt="Portugal" class="h-10 mx-auto opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-            </div>
-            <h2 class="text-3xl font-bold mb-10 uppercase tracking-widest text-white">AİLEYE KATIL</h2>
+            <div class="mb-8"><img src="https://flagcdn.com/pt.svg" alt="Portugal" class="h-10 mx-auto opacity-40 grayscale hover:grayscale-0 transition-all duration-500"></div>
+            <h2 class="text-3xl font-bold mb-10 uppercase tracking-widest text-white">İLETİŞİM</h2>
             <div class="flex justify-center gap-6 mb-12">
-                <a href="#" class="w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-[#5865F2] hover:text-white hover:scale-110 hover:rotate-3 transition-all duration-300 border border-zinc-800 shadow-lg group">
-                    <i class="fab fa-discord text-2xl group-hover:animate-bounce"></i>
-                </a>
-                <a href="#" class="w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-gang-red hover:text-white hover:scale-110 hover:-rotate-3 transition-all duration-300 border border-zinc-800 shadow-lg group">
-                    <i class="fas fa-file-signature text-2xl group-hover:animate-pulse"></i>
+                <a href="https://discord.gg/cErsczUnJ" target="_blank" class="w-20 h-20 bg-[#5865F2] rounded-2xl flex items-center justify-center text-white hover:scale-110 hover:rotate-3 transition-all duration-300 border-2 border-white/20 shadow-[0_0_30px_rgba(88,101,242,0.4)] group">
+                    <i class="fab fa-discord text-4xl group-hover:animate-bounce"></i>
                 </a>
             </div>
             <p class="text-zinc-600 text-sm font-light tracking-wide">&copy; 2024 Los Primeiros. Designed for MTA Roleplay.</p>
         </div>
     </footer>
 
-    <!-- Kurallar Paneli -->
+    <!-- Kurallar -->
     <div id="kurallar-panel" class="panel-modal">
         <div class="panel-inner max-h-[90vh] overflow-y-auto custom-scrollbar">
             <i class="fas fa-times close-btn" onclick="closePanel('kurallar-panel')"></i>
             <h2 class="text-3xl font-bold text-gang-red mb-8 uppercase tracking-widest text-center border-b border-zinc-800 pb-4">KURALLAR</h2>
-            
             <div class="space-y-6 text-gray-300 font-sans text-left">
                 <h3 class="text-xl font-bold text-white mb-2">LOS PRİMEİROS 🇵🇹 - RULES</h3>
                 <ul class="space-y-4 text-sm md:text-base text-gray-400 list-none">
@@ -322,33 +270,130 @@
                     <li class="pl-4 border-l-2 border-gang-red">> 6 - Birlik içerisindeki hiçbir üye birbirine karşı ne olursa olsun saygısızlık yapamaz. Saygısızlık halinde haklı/haksız gözetmeksizin iki tarafta uyarılır, 3 uyarıda birikten atılır!</li>
                     <li class="pl-4 border-l-2 border-gang-red">> *7 - IC rütbe istemek kesinlikle yasaktır. Kişi yaptığı roller ile göz önünde bulunucaktır, yeterince yükseltilecektir.</li>
                 </ul>
-                <br>
-                <h3 class="text-xl font-bold text-white mb-2">Voice RP Kullanımı HK.</h3>
+                <br><h3 class="text-xl font-bold text-white mb-2">Voice RP Kullanımı HK.</h3>
                 <p>Birlik içerisinde nerede olursa olsun, hiçbir koşulda Voice RP yapılması kesinlikle yasaktır. Voice RP’ye dair hiçbir istisna kabul edilmez, yapılama.</p>
-                <br>
-                <h3 class="text-xl font-bold text-white mb-2">Mahallede Aktiflik HK.</h3>
+                <br><h3 class="text-xl font-bold text-white mb-2">Mahallede Aktiflik HK.</h3>
                 <p>Birliğe bağlı tüm üyeler, hood bölgesi ve çevresinde düzenli şekilde aktif olmakla yükümlüdü.</p>
                 <p>| Birlik atmosferi, mahalledeki rol yoğunluğu ve etkileşimler üzerinden canlı kalır; bu nedenle her üyenin IC olarak bölgede bulunması, gözükmesi ve katkı sağlaması bekleir</p>
                 <p>| Mahallede aktif olmak yalnızca “orada durmak” anlamına gelmez; rol üretmek, karakterin çevreyle etkileşim kurması ve birliğin varlığını hissettirmesi geek.</p>
-                <br>
-                <p class="text-sm italic">*Oluşumumuzun IC ve OOC kuralları yukarıda belirlenmtir</p>
+                <br><p class="text-sm italic">*Oluşumumuzun IC ve OOC kuralları yukarıda belirlenmtir</p>
                 <p class="text-sm italic">*Tüm üyelerin bu kuralları okuması, anlaması ve uygulaması zorundur.*</p>
             </div>
         </div>
     </div>
 
-    <script>
-        // --- Animasyon ve Menü Kodları ---
+    <!-- KARAKTER TANITIMI PANELİ -->
+    <div id="karakter-panel" class="panel-modal">
+        <div class="panel-inner" style="padding: 0; overflow: hidden; height: 80vh;">
+            <i class="fas fa-times close-btn" onclick="closePanel('karakter-panel')" style="top: 10px; right: 15px; z-index: 100;"></i>
+            
+            <div class="flex flex-col md:flex-row h-full">
+                
+                <!-- SOL TARAFA (Menü Listesi) -->
+                <div class="w-full md:w-1/4 bg-zinc-900 border-b md:border-b-0 md:border-r border-zinc-800 overflow-y-auto">
+                    <div class="p-4 border-b border-zinc-800">
+                        <h2 class="text-xl font-bold text-gang-red tracking-widest uppercase">ÜYELER</h2>
+                    </div>
+                    
+                    <!-- Butonlar -->
+                    <button onclick="showChar('andre')" class="char-btn active" id="btn-andre">
+                        Andre Costa <span class="text-xs text-gang-red ml-1">#BOSS</span>
+                    </button>
+                    <button onclick="showChar('wigly')" class="char-btn" id="btn-wigly">Wigly Clarke</button>
+                    <button onclick="showChar('luis')" class="char-btn" id="btn-luis">Luis Carvalho</button>
+                    <button onclick="showChar('seth')" class="char-btn" id="btn-seth">Seth Swech</button>
+                    <button onclick="showChar('cedric')" class="char-btn" id="btn-cedric">Cedric Cyrus</button>
+                    <button onclick="showChar('zaki')" class="char-btn" id="btn-zaki">Zaki Lawronks</button>
+                    <!-- Yeni Butonlar -->
+                    <button onclick="showChar('rafael')" class="char-btn" id="btn-rafael">Rafael Swech</button>
+                    <button onclick="showChar('dante')" class="char-btn" id="btn-dante">Dante Silva</button>
+                </div>
 
+                <!-- SAĞ TARAFA (İçerik) -->
+                <div class="w-full md:w-3/4 bg-black/90 p-6 md:p-10 overflow-y-auto custom-scrollbar relative">
+                    
+                    <!-- Andre Costa İçeriği -->
+                    <div id="content-andre" class="char-content active flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-1/3 flex-shrink-0">
+                            <img src="https://imgur.com/a/xerqfbG" onerror="this.src='https://i.imgur.com/ACO6rHe.jpeg';" class="w-full h-auto rounded border-2 border-gang-red shadow-lg object-cover">
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <h2 class="text-4xl font-bold text-white mb-1 uppercase">ANDRE COSTA</h2>
+                            <h3 class="text-xl text-gang-red font-grunge mb-4 border-b border-zinc-800 pb-2">THE BOSS</h3>
+                            <div class="text-gray-400 text-sm leading-relaxed space-y-3 font-sans">
+                                <p>Portekiz’in arka sokaklarında büyüyen Andre Costa, yoksulluğun içinde ama dostluğun sıcaklığında bir hayat yaşadı. Henüz çocukken bir basket sahasında tanıştığı arkadaşlarıyla kurduğu bağ, zamanla kardeşliğe dönüştü. O sahalar, onların hem sığınağı hem de umutlarıydı.</p>
+                                <p>Ancak bir gün, sahada çıkan bir tartışma büyük bir kavgaya dönüştü. Bu kavga, içlerinden en yetenekli olan oyuncunun, Andre'nin en yakın dostunun hayatına mal oldu. Polis olayın üstünü örttü, kimse ceza almadı. Andre, o gün adaletin sustuğunu gördü.</p>
+                                <p>Gözyaşları dinmeden, gece yarısı babasının özel çekmecesinden tabancasını çaldı. Öfkesini bastıramayan Andre, katillerin mahallesine dostlarınıda toplayıp gitti. Kurşunlar, kaybettiklerinin çığlığı gibiydi. O gece hem çocukluğunu kaybetti hem de yeni bir hayata adım attı.İntikamdan sonra Andre, "Los Primeiros" çetesini kurdu. Artık tek amacı vardı: ailesi gibi gördüğü dostlarının adını yaşatmak ve bir daha kimsenin sevdiklerini kaybetmemesi için kendi adaletini sağlamak.</p>
+                                <p class="text-gray-500 italic mt-4 border-l-2 border-gang-red pl-3">Portekiz devleti peşlerine düştüğünde, Andre ve hayatta kalan üyeler Grandoria Adası’na kaçtı. Ancak bu kaçış, bir yenilgi değil, yeni bir başlangıçtı.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rafael Swech İçeriği (YENİ) -->
+                    <div id="content-rafael" class="char-content flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-1/3 flex-shrink-0">
+                            <!-- Rafael için placeholder resim -->
+                            <img src="https://imgur.com/a/Clst3Ek" class="w-full h-auto rounded border-2 border-zinc-700 shadow-lg object-cover grayscale">
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <h2 class="text-4xl font-bold text-white mb-1 uppercase">RAFAEL SWECH</h2>
+                            <h3 class="text-xl text-zinc-500 font-grunge mb-4 border-b border-zinc-800 pb-2">ÜYE</h3>
+                            <div class="text-gray-400 text-sm leading-relaxed space-y-3 font-sans">
+                                <p>Rafael Swech, iri yapılı, güçlü görünümlü bir adamdır. Geniş omuzları ve sağlam vücut yapısı, hayatı boyunca fiziksel işler yapmış biri olduğunu hissettirir. Üzerindeki bol kesim, açık kahverengi kare desenli gömleği ve koyu pantolonu, rahatlığına düşkün ama klasik tarzı seven biri olduğunu gösterir.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dante Silva (Yeni 2. Adam Placeholder) -->
+                    <div id="content-dante" class="char-content flex-col items-center justify-center h-full text-center">
+                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
+                        <h2 class="text-3xl font-bold text-white">DANTE SILVA</h2>
+                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+                    </div>
+
+                    <!-- Diğer Karakterler (Placeholder) -->
+                    <div id="content-wigly" class="char-content flex-col items-center justify-center h-full text-center">
+                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
+                        <h2 class="text-3xl font-bold text-white">WIGLY CLARKE</h2>
+                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+                    </div>
+
+                    <div id="content-luis" class="char-content flex-col items-center justify-center h-full text-center">
+                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
+                        <h2 class="text-3xl font-bold text-white">LUIS CARVALHO</h2>
+                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+                    </div>
+
+                    <div id="content-seth" class="char-content flex-col items-center justify-center h-full text-center">
+                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
+                        <h2 class="text-3xl font-bold text-white">SETH SWECH</h2>
+                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+                    </div>
+                     <div id="content-cedric" class="char-content flex-col items-center justify-center h-full text-center">
+                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
+                        <h2 class="text-3xl font-bold text-white">CEDRIC CYRUS</h2>
+                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+                    </div>
+                     <div id="content-zaki" class="char-content flex-col items-center justify-center h-full text-center">
+                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
+                        <h2 class="text-3xl font-bold text-white">ZAKI LAWRONKS</h2>
+                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animasyon ve Menü
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
                 var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
+                if (elementTop < windowHeight - elementVisible) reveals[i].classList.add("active");
             }
         }
         window.addEventListener("scroll", reveal);
@@ -356,37 +401,36 @@
         function toggleMenu() {
             const menu = document.getElementById('fullscreen-menu');
             if (menu.classList.contains('show')) {
-                menu.classList.remove('show');
-                setTimeout(() => { menu.style.display = 'none'; }, 400);
-                document.body.style.overflow = 'auto';
+                menu.classList.remove('show'); setTimeout(() => { menu.style.display = 'none'; }, 400); document.body.style.overflow = 'auto';
             } else {
-                menu.style.display = 'flex';
-                setTimeout(() => { menu.classList.add('show'); }, 10);
-                document.body.style.overflow = 'hidden';
+                menu.style.display = 'flex'; setTimeout(() => { menu.classList.add('show'); }, 10); document.body.style.overflow = 'hidden'; 
                 closePanel('kurallar-panel');
+                closePanel('karakter-panel');
             }
         }
 
         function openPanel(panelId) {
-            const menu = document.getElementById('fullscreen-menu');
-            menu.classList.remove('show');
-            setTimeout(() => { menu.style.display = 'none'; }, 400);
-
-            const panel = document.getElementById(panelId);
-            if(panel) {
-                panel.style.display = 'flex';
-                setTimeout(() => { panel.classList.add('show'); }, 10);
-                document.body.style.overflow = 'hidden';
-            }
+            document.getElementById('fullscreen-menu').classList.remove('show'); setTimeout(() => { document.getElementById('fullscreen-menu').style.display = 'none'; }, 400);
+            const panel = document.getElementById(panelId); if(panel) { panel.style.display = 'flex'; setTimeout(() => { panel.classList.add('show'); }, 10); document.body.style.overflow = 'hidden'; }
         }
 
         function closePanel(panelId) {
-            const panel = document.getElementById(panelId);
-            if(panel) {
-                panel.classList.remove('show');
-                setTimeout(() => { panel.style.display = 'none'; }, 400);
-                document.body.style.overflow = 'auto';
-            }
+            const panel = document.getElementById(panelId); if(panel) { panel.classList.remove('show'); setTimeout(() => { panel.style.display = 'none'; }, 400); document.body.style.overflow = 'auto'; }
+        }
+
+        // --- KARAKTER MENÜ GEÇİŞİ ---
+        function showChar(charId) {
+            // Tüm içerikleri gizle
+            document.querySelectorAll('.char-content').forEach(el => el.classList.remove('active'));
+            // Tüm butonların aktifliğini kaldır
+            document.querySelectorAll('.char-btn').forEach(el => el.classList.remove('active'));
+
+            // Seçileni aç
+            const content = document.getElementById('content-' + charId);
+            const btn = document.getElementById('btn-' + charId);
+            
+            if(content) content.classList.add('active');
+            if(btn) btn.classList.add('active');
         }
     </script>
 </body>
