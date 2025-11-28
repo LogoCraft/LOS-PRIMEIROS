@@ -65,7 +65,7 @@
 
         .panel-inner {
             background-color: #171717; border: 1px solid #b91c1c;
-            width: 100%; max-width: 1000px; padding: 2rem; position: relative;
+            width: 100%; max-width: 1200px; padding: 2rem; position: relative;
             box-shadow: 0 0 50px rgba(185, 28, 28, 0.2); border-radius: 8px; 
             transform: scale(0.95); transition: transform 0.4s ease;
             max-height: 90vh; display: flex; flex-direction: column;
@@ -158,9 +158,8 @@
                             <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Zaki Lawronks</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#7</span></li>
                             <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Carter Ice</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#8</span></li>
                             <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Jeremiah Langford</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#9</span></li>
-                            <!-- Yeni Üyeler -->
-                            <li class="flex justify-between items-center group cursor-default border-t border-white/5 pt-1 mt-1"><span class="group-hover:text-white transition-colors font-bold text-gang-red/80">Rafael Swech</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#10</span></li>
-                            <li class="flex justify-between items-center group cursor-default"><span class="group-hover:text-white transition-colors">Dante Silva</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#11</span></li>
+                            <!-- Rafael (Rengi Düzeltildi) -->
+                            <li class="flex justify-between items-center group cursor-default border-t border-white/5 pt-1 mt-1"><span class="group-hover:text-white transition-colors">Rafael Swech</span> <span class="text-xs bg-white/5 text-gray-400 px-2 py-1 rounded">#10</span></li>
                         </ul>
                     </div>
 
@@ -214,18 +213,18 @@
                 ÇETEDEN <span class="text-gang-red">KARELER</span>
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Foto 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Foto 1 (Mevcut - Boyut 4'e bölündü) -->
                 <div class="aspect-video rounded-xl overflow-hidden shadow-lg shadow-red-900/10 border-2 border-zinc-800 relative group">
-                    <img src="uploaded:WhatsApp Image 2025-11-25 at 19.51.55_fe628c1b.jpg-0cf6da59-fd2f-479a-af98-9eb7a6d8d60f" 
-                         onerror="this.src='https://imgur.com/a/jJqzivi';"
-                         class="static-img w-full h-full object-cover">
+                    <img src="uploaded:WhatsApp Image 2025-11-25 at 19.51.55_fe628c1b.jpg-0cf6da59-fd2f-479a-af98-9eb7a6d8d60f"
+     onerror="this.onerror=null; this.src='https://i.postimg.cc/hj6M6Qpq/Whats-App-Image-2025-11-28-at-18-46-07-504906c5.jpg';"
+     class="static-img w-full h-full object-cover">
                     <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                         <span class="text-white font-bold tracking-wider">BÖLGE HAKİMİYETİ</span>
                     </div>
                 </div>
 
-                <!-- Foto 2 -->
+                <!-- Foto 2 (Mevcut - Boyut 4'e bölündü) -->
                 <div class="aspect-video rounded-xl overflow-hidden shadow-lg shadow-red-900/10 border-2 border-zinc-800 relative group">
                     <img src="uploaded:WhatsApp Image 2025-11-25 at 19.51.55_2b317fd9.jpg-7a4518ca-4f61-4d1b-918d-f145e70c11b5" 
                          onerror="this.src='https://i.imgur.com/Ts5rx5E.jpeg';"
@@ -234,6 +233,25 @@
                         <span class="text-white font-bold tracking-wider">AİLE BAĞLARI</span>
                     </div>
                 </div>
+                
+                <!-- Yeni Foto 3 -->
+                <div class="aspect-video rounded-xl overflow-hidden shadow-lg shadow-red-900/10 border-2 border-zinc-800 relative group">
+                    <img src="https://i.postimg.cc/MT5tZr66/Whats-App-Image-2025-11-28-at-19-34-54-4b8bdd9b.jpg" 
+                         class="static-img w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <span class="text-white font-bold tracking-wider">EKİP İÇİ ROL</span>
+                    </div>
+                </div>
+
+                <!-- Yeni Foto 4 -->
+                <div class="aspect-video rounded-xl overflow-hidden shadow-lg shadow-red-900/10 border-2 border-zinc-800 relative group">
+                    <img src="https://i.postimg.cc/W38SpfN2/Whats-App-Image-2025-11-28-at-19-34-54-f59c18c2.jpg" 
+                         class="static-img w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <span class="text-white font-bold tracking-wider">SOKAK HAYATI</span>
+                    </div>
+                </div>
+
             </div>
             <p class="text-center text-gray-500 text-sm mt-8 opacity-60">*Fotoğraflar sabittir.</p>
         </div>
@@ -304,20 +322,21 @@
                     <button onclick="showChar('seth')" class="char-btn" id="btn-seth">Seth Swech</button>
                     <button onclick="showChar('cedric')" class="char-btn" id="btn-cedric">Cedric Cyrus</button>
                     <button onclick="showChar('zaki')" class="char-btn" id="btn-zaki">Zaki Lawronks</button>
-                    <!-- Yeni Butonlar -->
+                    <button onclick="showChar('carter')" class="char-btn" id="btn-carter">Carter Ice</button>
                     <button onclick="showChar('rafael')" class="char-btn" id="btn-rafael">Rafael Swech</button>
-                    <button onclick="showChar('dante')" class="char-btn" id="btn-dante">Dante Silva</button>
+                     <button onclick="showChar('jeremiah')" class="char-btn" id="btn-jeremiah">Jeremiah Langford</button>
                 </div>
 
                 <!-- SAĞ TARAFA (İçerik) -->
                 <div class="w-full md:w-3/4 bg-black/90 p-6 md:p-10 overflow-y-auto custom-scrollbar relative">
                     
-                    <!-- Andre Costa İçeriği -->
+                    <!-- Andre Costa İçeriği (SABİT) -->
                     <div id="content-andre" class="char-content active flex-col md:flex-row gap-6">
-                        <div class="w-full md:w-1/3 flex-shrink-0">
-                            <img src="https://imgur.com/a/xerqfbG" onerror="this.src='https://i.imgur.com/ACO6rHe.jpeg';" class="w-full h-auto rounded border-2 border-gang-red shadow-lg object-cover">
+                        <div class="w-full md:w-1/2 flex-shrink-0">
+                            <img src="https://i.imgur.com/ACO6rHe.jpeg" class="w-full h-auto rounded border-2 border-gang-red shadow-lg object-cover">
+                            <p class="text-center text-xs text-gray-500 mt-2">ANDRE COSTA FOTOĞRAFI</p>
                         </div>
-                        <div class="w-full md:w-2/3">
+                        <div class="w-full md:w-1/2">
                             <h2 class="text-4xl font-bold text-white mb-1 uppercase">ANDRE COSTA</h2>
                             <h3 class="text-xl text-gang-red font-grunge mb-4 border-b border-zinc-800 pb-2">THE BOSS</h3>
                             <div class="text-gray-400 text-sm leading-relaxed space-y-3 font-sans">
@@ -329,13 +348,13 @@
                         </div>
                     </div>
 
-                    <!-- Rafael Swech İçeriği (YENİ) -->
+                    <!-- Rafael Swech İçeriği (SABİT) -->
                     <div id="content-rafael" class="char-content flex-col md:flex-row gap-6">
-                        <div class="w-full md:w-1/3 flex-shrink-0">
-                            <!-- Rafael için placeholder resim -->
-                            <img src="https://imgur.com/a/Clst3Ek" class="w-full h-auto rounded border-2 border-zinc-700 shadow-lg object-cover grayscale">
+                        <div class="w-full md:w-1/2 flex-shrink-0">
+                            <img src="https://i.postimg.cc/LXwvwgNp/Whats-App-Image-2025-11-28-at-19-11-49-950efeb4.jpg" class="w-full h-auto rounded border-2 border-zinc-700 shadow-lg object-cover">
+                            <p class="text-center text-xs text-gray-500 mt-2">RAFAEL SWECH FOTOĞRAFI</p>
                         </div>
-                        <div class="w-full md:w-2/3">
+                        <div class="w-full md:w-1/2">
                             <h2 class="text-4xl font-bold text-white mb-1 uppercase">RAFAEL SWECH</h2>
                             <h3 class="text-xl text-zinc-500 font-grunge mb-4 border-b border-zinc-800 pb-2">ÜYE</h3>
                             <div class="text-gray-400 text-sm leading-relaxed space-y-3 font-sans">
@@ -344,40 +363,110 @@
                         </div>
                     </div>
 
-                    <!-- Dante Silva (Yeni 2. Adam Placeholder) -->
-                    <div id="content-dante" class="char-content flex-col items-center justify-center h-full text-center">
-                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
-                        <h2 class="text-3xl font-bold text-white">DANTE SILVA</h2>
-                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+                    <!-- Carter Ice İçeriği (SABİT) -->
+                    <div id="content-carter" class="char-content flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-1/2 flex-shrink-0">
+                            <img src="https://i.imgur.com/tFA5lbE.jpeg" class="w-full h-auto rounded border-2 border-zinc-700 shadow-lg object-cover">
+                            <p class="text-center text-xs text-gray-500 mt-2">CARTER ICE FOTOĞRAFI</p>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <h2 class="text-4xl font-bold text-white mb-1 uppercase">CARTER ICE</h2>
+                            <h3 class="text-xl text-zinc-500 font-grunge mb-4 border-b border-zinc-800 pb-2">YÜKSELEN YILDIZ</h3>
+                            <div class="text-gray-400 text-sm leading-relaxed space-y-3 font-sans">
+                                <p>Carter Ice, Lizbon’un arka sokaklarında büyüyen 21 yaşında siyahi bir gençtir. Enerjisi ve hızlı düşüncesiyle mahalledeki basketbolcularla yakınlık kurar; bu ortam ona ilk kez aidiyet hissi verir. Basketbol, ona disiplin ve dayanıklılık kazandırırken, mahallenin etkili ve tehlikeli ekibi Los Primeiros dikkatini çeker. Yeteneği ve sadakati sayesinde ekibe girer ve zamanla önemli bir isim hâline gelir. Bugün Carter, Los Primeiros’un genç, sessiz, kendinden emin ve stratejik yükselen yıldızı olarak tanınır.</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Diğer Karakterler (Placeholder) -->
-                    <div id="content-wigly" class="char-content flex-col items-center justify-center h-full text-center">
-                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
-                        <h2 class="text-3xl font-bold text-white">WIGLY CLARKE</h2>
-                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+                    <!-- Luis Carvalho İçeriği (SABİT) -->
+                    <div id="content-luis" class="char-content flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-1/2 flex-shrink-0">
+                            <img src="https://i.postimg.cc/dQ5xmD8R/Whats-App-Image-2025-11-28-at-19-11-23-6798a7c2.jpg" class="w-full h-auto rounded border-2 border-zinc-700 shadow-lg object-cover">
+                            <p class="text-center text-xs text-gray-500 mt-2">LUIS CARVALHO FOTOĞRAFI</p>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <h2 class="text-4xl font-bold text-white mb-1 uppercase">LUIS CARVALHO</h2>
+                            <h3 class="text-xl text-zinc-500 font-grunge mb-4 border-b border-zinc-800 pb-2">ÜYE</h3>
+                            <div class="text-gray-400 text-sm leading-relaxed space-y-3 font-sans">
+                                <p>Luis Carvalho, Lizbon’un arka sokaklarında futbolcu olma hayaliyle büyürken, mahallesinde herkes basketbol oynadığı için zamanla basketbola yöneldi. Yeni tutkusunu arkadaşlarıyla paylaşırken, bir gün sahada çıkan tartışma sonucu en yakın dostu Henrique öldürüldü. Olayın üstü örtülünce Luis öfkeye kapılıp intikam peşine düştü. Sonunda Luis ve arkadaşları “Los Primeiros ” adını alarak devletin hedefi haline geldiler ve Lizbon’dan kaçmak zorunda kaldılar. Sabah olduğunda Grandoria Adası’na ulaşan Luis, geçmişinin acılarını taşısa da burada yeni bir başlangıç umudu buldu.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Zaki Lawronks İçeriği (YENİ HİKAYE EKLENDİ) -->
+                    <div id="content-zaki" class="char-content flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-1/2 flex-shrink-0">
+                            <img src="https://i.postimg.cc/Jh11HG3X/Whats-App-Image-2025-11-28-at-19-30-18-f8ba7eda.jpg" class="w-full h-auto rounded border-2 border-zinc-700 shadow-lg object-cover">
+                            <p class="text-center text-xs text-gray-500 mt-2">ZAKI LAWRONKS FOTOĞRAFI</p>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <h2 class="text-4xl font-bold text-white mb-1 uppercase">ZAKI LAWRONKS</h2>
+                            <h3 class="text-xl text-zinc-500 font-grunge mb-4 border-b border-zinc-800 pb-2">ÜYE</h3>
+                            <div class="text-gray-400 text-sm leading-relaxed space-y-3 font-sans">
+                                <p>Şehrin hareketli sokaklarında büyüyen Zaki, küçük yaşlarda vakit geçirdiği basketbol sahasında ilk kez Los Primeiros ekibiyle tanışır. Cool duruşu, özgüveni ve detaylara önem veren tarzı kısa sürede dikkatlerini çeker. Zamanla ekiple samimiyet kurar, hem şehir yaşamına uyumlu stili hem de sakin karizmasıyla grubun içinde kendine sağlam bir yer edinir. Bugün Zaki, modern sokak modasının temsilcisi, hedef odaklı ve gizemli yapısıyla Los Primeiros’un sessiz ama etkileyici isimlerinden biridir.</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div id="content-luis" class="char-content flex-col items-center justify-center h-full text-center">
-                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
-                        <h2 class="text-3xl font-bold text-white">LUIS CARVALHO</h2>
-                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+
+                    <!-- Wigly Clarke İçeriği (BOŞ ŞABLON) -->
+                    <div id="content-wigly" class="char-content flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-1/2 flex-shrink-0">
+                             <img src="https://placehold.co/400x500/1a1a1a/666?text=WIGLY+FOTOĞRAFI" class="w-full h-auto rounded border-2 border-zinc-700 shadow-lg object-cover">
+                             <p class="text-center text-xs text-gray-500 mt-2">WIGLY CLARKE FOTOĞRAFI</p>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <h2 class="text-4xl font-bold text-white mb-1 uppercase">WIGLY CLARKE</h2>
+                            <h3 class="text-xl text-zinc-500 font-grunge mb-4 border-b border-zinc-800 pb-2">ÜYE</h3>
+                            <div class="text-gray-400 text-sm leading-relaxed space-y-3 font-sans">
+                                <p>BURAYA WIGLY CLARKE HİKAYESİNİ YAZABİLİRSİNİZ. BU METNİ DÜZENLEYEREK KARAKTERİN GEÇMİŞİNİ, GRUBA KATILIMINI VE KİŞİLİK ÖZELLİKLERİNİ BELİRTİN.</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div id="content-seth" class="char-content flex-col items-center justify-center h-full text-center">
-                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
-                        <h2 class="text-3xl font-bold text-white">SETH SWECH</h2>
-                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+                    <!-- Seth Swech İçeriği (BOŞ ŞABLON) -->
+                    <div id="content-seth" class="char-content flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-1/2 flex-shrink-0">
+                            <img src="https://placehold.co/400x500/1a1a1a/666?text=SETH+FOTOĞRAFI" class="w-full h-auto rounded border-2 border-zinc-700 shadow-lg object-cover">
+                            <p class="text-center text-xs text-gray-500 mt-2">SETH SWECH FOTOĞRAFI</p>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <h2 class="text-4xl font-bold text-white mb-1 uppercase">SETH SWECH</h2>
+                            <h3 class="text-xl text-zinc-500 font-grunge mb-4 border-b border-zinc-800 pb-2">ÜYE</h3>
+                            <div class="text-gray-400 text-sm leading-relaxed space-y-3 font-sans">
+                                <p>BURAYA SETH SWECH HİKAYESİNİ YAZABİLİRSİNİZ. BU METNİ DÜZENLEYEREK KARAKTERİN GEÇMİŞİNİ, GRUBA KATILIMINI VE KİŞİLİK ÖZELLİKLERİNİ BELİRTİN.</p>
+                            </div>
+                        </div>
                     </div>
-                     <div id="content-cedric" class="char-content flex-col items-center justify-center h-full text-center">
-                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
-                        <h2 class="text-3xl font-bold text-white">CEDRIC CYRUS</h2>
-                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+                     
+                    <!-- Cedric Cyrus İçeriği (BOŞ ŞABLON) -->
+                    <div id="content-cedric" class="char-content flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-1/2 flex-shrink-0">
+                            <img src="https://placehold.co/400x500/1a1a1a/666?text=CEDRIC+FOTOĞRAFI" class="w-full h-auto rounded border-2 border-zinc-700 shadow-lg object-cover">
+                            <p class="text-center text-xs text-gray-500 mt-2">CEDRIC CYRUS FOTOĞRAFI</p>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <h2 class="text-4xl font-bold text-white mb-1 uppercase">CEDRIC CYRUS</h2>
+                            <h3 class="text-xl text-zinc-500 font-grunge mb-4 border-b border-zinc-800 pb-2">ÜYE</h3>
+                            <div class="text-gray-400 text-sm leading-relaxed space-y-3 font-sans">
+                                <p>BURAYA CEDRIC CYRUS HİKAYESİNİ YAZABİLİRSİNİZ. BU METNİ DÜZENLEYEREK KARAKTERİN GEÇMİŞİNİ, GRUBA KATILIMINI VE KİŞİLİK ÖZELLİKLERİNİ BELİRTİN.</p>
+                            </div>
+                        </div>
                     </div>
-                     <div id="content-zaki" class="char-content flex-col items-center justify-center h-full text-center">
-                        <i class="fas fa-user-secret text-6xl text-zinc-800 mb-4"></i>
-                        <h2 class="text-3xl font-bold text-white">ZAKI LAWRONKS</h2>
-                        <p class="text-gray-500 mt-2">Hikaye yakında eklenecek...</p>
+                     
+                    <!-- Jeremiah Langford İçeriği (BOŞ ŞABLON) -->
+                    <div id="content-jeremiah" class="char-content flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-1/2 flex-shrink-0">
+                            <img src="https://placehold.co/400x500/1a1a1a/666?text=JEREMIAH+FOTOĞRAFI" class="w-full h-auto rounded border-2 border-zinc-700 shadow-lg object-cover">
+                            <p class="text-center text-xs text-gray-500 mt-2">JEREMIAH LANGFORD FOTOĞRAFI</p>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <h2 class="text-4xl font-bold text-white mb-1 uppercase">JEREMIAH LANGFORD</h2>
+                            <h3 class="text-xl text-zinc-500 font-grunge mb-4 border-b border-zinc-800 pb-2">ÜYE</h3>
+                            <div class="text-gray-400 text-sm leading-relaxed space-y-3 font-sans">
+                                <p>BURAYA JEREMIAH LANGFORD HİKAYESİNİ YAZABİLİRSİNİZ. BU METNİ DÜZENLEYEREK KARAKTERİN GEÇMİŞİNİ, GRUBA KATILIMINI VE KİŞİLİK ÖZELLİKLERİNİ BELİRTİN.</p>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -432,6 +521,11 @@
             if(content) content.classList.add('active');
             if(btn) btn.classList.add('active');
         }
+        // Paneli ilk açtığında Andre Costa'nın içeriği gözüksün.
+        document.addEventListener('DOMContentLoaded', () => {
+             document.getElementById('btn-andre').classList.add('active');
+             document.getElementById('content-andre').classList.add('active');
+        });
     </script>
 </body>
 </html>
